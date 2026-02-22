@@ -22,6 +22,55 @@ Database: Amazon DynamoDB stores cloud facts in a NoSQL format for high-speed re
 
 Security: AWS IAM roles and policies strictly manage permissions between services.
 
+graph LR
+    %% Node Tanımları
+    Browser[🖥️ Kullanıcı Tarayıcısı]
+    Amplify[🚀 AWS Amplify\n(Frontend Hosting)]
+    APIGW[🚪 Amazon API Gateway\n(REST Endpoint)]
+    Lambda[🧠 AWS Lambda\n(Backend Mantığı)]
+    DDB[(🗄️ Amazon DynamoDB\nVeri Depolama)]
+
+    %% Akış Tanımları
+    Browser -- 1. Siteyi Yükle --> Amplify
+    Browser -- 2. Butona Tıkla\n(HTTP GET İsteği) --> APIGW
+    APIGW -- 3. Fonksiyonu Tetikle --> Lambda
+    Lambda -- 4. Veri Oku\n(IAM Yetkisi ile) --> DDB
+    DDB -.->|5. Veriyi Dön| Lambda
+    Lambda -.->|6. JSON Yanıtı| APIGW
+    APIGW -.->|7. Sonucu Göster| Browser
+
+    %% Stil Tanımları (Opsiyonel)
+    classDef aws fill:#FF9900,stroke:#232F3E,stroke-width:2px,color:white;
+    classDef client fill:#f9f,stroke:#333,stroke-width:2px;
+    class APIGW,Lambda,DDB,Amplify aws;
+    class Browser client;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 🚀 Key Features & Engineering Challenges
 
 1. Cross-Origin Resource Sharing (CORS)
